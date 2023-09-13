@@ -115,7 +115,6 @@ const refreshToken = async (token: string) => {
 };
 
 // profile
-
 const getUserProfile = async (token: any): Promise<user | null> => {
   const { role, userId } = token;
   const result = await prisma.user.findUnique({
