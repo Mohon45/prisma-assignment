@@ -4,18 +4,18 @@
 
 - api/v1/auth/signup (POST)
 - api/v1/users (GET)
-- api/v1/users/7a58719b-8434-412f-994e-a01f069285de (Single GET)
-- api/v1/users/9108e33b-6389-4342-b0de-96f7c2621df7 (PATCH)
-- api/v1/users/9108e33b-6389-4342-b0de-96f7c2621df7 (DELETE)
+- api/v1/users/6b2a991c-0091-4490-8823-ce6db576fb91 (Single GET)
+- api/v1/users/6b2a991c-0091-4490-8823-ce6db576fb91 (PATCH)
+- api/v1/users/c2eb7012-1abf-4106-b386-cc3e6ae8274c (DELETE)
 - api/v1/profile (GET)
 
   ### CATEGORY
 
 - api/v1/categories/create-category (POST)
 - api/v1/categories (GET)
-- api/v1/categories/"0572fa6e-f2cf-4f64-9a6a-3f1b628cad77 (Single GET)
-- api/v1/categories/fcfe1362-c4d5-4533-a2cc-23d56174a8f1 (PATCH)
-- api/v1/categories/fcfe1362-c4d5-4533-a2cc-23d56174a8f1 (DELETE)
+- api/v1/categories/f7b077e4-5834-4008-9026-da51118c010d (Single GET)
+- api/v1/categories/f7b077e4-5834-4008-9026-da51118c010d (PATCH)
+- api/v1/categories/076dabae-5d88-4152-bca3-e43368a4ce2f (DELETE)
 
 ### BOOK
 
