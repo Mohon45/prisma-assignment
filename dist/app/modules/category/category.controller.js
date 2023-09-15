@@ -19,8 +19,8 @@ const createCategory = (0, catchAsync_1.default)((req, res) => __awaiter(void 0,
     res.send({
         success: true,
         statusCode: 200,
-        message: "Category created successfully",
-        data: result
+        message: 'Category created successfully',
+        data: result,
     });
 }));
 const updateCategory = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -41,7 +41,7 @@ const getallcateGories = (0, catchAsync_1.default)((req, res) => __awaiter(void 
         data: result,
     });
 }));
-// getsingle 
+// getsingle
 const getsingleCategory = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield category_service_1.default.getsingleCategory(req.params.id);
     res.send({
@@ -65,6 +65,6 @@ const categoryController = {
     updateCategory,
     deleteCategory,
     getsingleCategory,
-    getallcateGories
+    getallcateGories,
 };
 exports.default = categoryController;

@@ -17,8 +17,8 @@ const ApiError_1 = __importDefault(require("../../../errors/ApiError"));
 const prisma_1 = __importDefault(require("../../../shared/prisma"));
 const createOrder = (token, data) => __awaiter(void 0, void 0, void 0, function* () {
     const { userId, role } = token;
-    if (role !== "customer") {
-        throw new ApiError_1.default(http_status_1.default.UNAUTHORIZED, "Only customers can create an order");
+    if (role !== 'customer') {
+        throw new ApiError_1.default(http_status_1.default.UNAUTHORIZED, 'Only customers can create an order');
     }
     const orderedBooks = data.orderedBooks; // Get the ordered books data
     const orders = yield prisma_1.default.$transaction((prismaClient) => __awaiter(void 0, void 0, void 0, function* () {
@@ -28,7 +28,7 @@ const createOrder = (token, data) => __awaiter(void 0, void 0, void 0, function*
             },
             include: {
                 orderedBooks: true,
-            }
+            },
         });
         const orderedBooksData = orderedBooks.map((orderedBook) => {
             const { bookId, quantity } = orderedBook;
@@ -44,7 +44,7 @@ const createOrder = (token, data) => __awaiter(void 0, void 0, void 0, function*
         const { id } = createdOrder;
         const showOrder = yield prismaClient.order.findFirst({
             where: {
-                id // Replace with the actual order ID you want to retrieve
+                id, // Replace with the actual order ID you want to retrieve
             },
             include: {
                 orderedBooks: {
@@ -74,31 +74,31 @@ const createOrder = (token, data) => __awaiter(void 0, void 0, void 0, function*
 const getSingleOrder = (token) => __awaiter(void 0, void 0, void 0, function* () {
     const { role, userId } = token;
     let result;
-    if (role && role === "admin") {
+    if (role && role === 'admin') {
         result = yield prisma_1.default.order.findMany({
             include: {
                 orderedBooks: {
                     include: {
-                        book: true
-                    }
-                }
-            }
+                        book: true,
+                    },
+                },
+            },
         });
     }
-    else if (role && role === "customer") {
+    else if (role && role === 'customer') {
         result = yield prisma_1.default.order.findMany({
             where: {
                 userId: {
-                    equals: userId
+                    equals: userId,
                 },
             },
             include: {
                 orderedBooks: {
                     include: {
-                        book: true
-                    }
-                }
-            }
+                        book: true,
+                    },
+                },
+            },
         });
     }
     if (!result || result.length === 0) {
@@ -106,39 +106,39 @@ const getSingleOrder = (token) => __awaiter(void 0, void 0, void 0, function* ()
     }
     return result;
 });
-// bonus part get specific order 
+// bonus part get specific order
 const getspecificOrder = (id, token) => __awaiter(void 0, void 0, void 0, function* () {
     const { role, userId } = token;
     let result;
-    if (role && role === "admin") {
+    if (role && role === 'admin') {
         result = yield prisma_1.default.order.findMany({
             where: {
-                id
+                id,
             },
             include: {
                 orderedBooks: {
                     include: {
-                        book: true
-                    }
-                }
-            }
+                        book: true,
+                    },
+                },
+            },
         });
     }
-    else if (role && role === "customer") {
+    else if (role && role === 'customer') {
         result = yield prisma_1.default.order.findMany({
             where: {
                 id,
                 userId: {
-                    equals: userId
+                    equals: userId,
                 },
             },
             include: {
                 orderedBooks: {
                     include: {
-                        book: true
-                    }
-                }
-            }
+                        book: true,
+                    },
+                },
+            },
         });
     }
     if (!result || result.length === 0) {
@@ -149,6 +149,6 @@ const getspecificOrder = (id, token) => __awaiter(void 0, void 0, void 0, functi
 const orderServices = {
     createOrder,
     getSingleOrder,
-    getspecificOrder
+    getspecificOrder,
 };
 exports.default = orderServices;

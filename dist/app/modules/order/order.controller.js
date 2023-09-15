@@ -54,6 +54,6 @@ const getspecificOrder = (0, catchAsync_1.default)((req, res) => __awaiter(void 
 const orderController = {
     createAorder,
     getspecificOrder,
-    getSingleOrder
+    getSingleOrder,
 };
 exports.default = orderController;

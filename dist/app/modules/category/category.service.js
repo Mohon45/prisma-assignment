@@ -18,7 +18,7 @@ const prisma_1 = __importDefault(require("../../../shared/prisma"));
 // create
 const createCategory = (data) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield prisma_1.default.category.create({
-        data
+        data,
     });
     return result;
 });
@@ -26,12 +26,12 @@ const createCategory = (data) => __awaiter(void 0, void 0, void 0, function* () 
 const updateCategory = (id, data) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield prisma_1.default.category.update({
         where: {
-            id
+            id,
         },
         include: {
-            books: true
+            books: true,
         },
-        data
+        data,
     });
     return result;
 });
@@ -39,8 +39,8 @@ const updateCategory = (id, data) => __awaiter(void 0, void 0, void 0, function*
 const getallcateGories = () => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield prisma_1.default.category.findMany({
         include: {
-            books: true
-        }
+            books: true,
+        },
     });
     if (!result) {
         throw new ApiError_1.default(http_status_1.default.BAD_REQUEST, 'something went wrong');
@@ -51,11 +51,11 @@ const getallcateGories = () => __awaiter(void 0, void 0, void 0, function* () {
 const getsingleCategory = (id) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield prisma_1.default.category.findUnique({
         where: {
-            id
+            id,
         },
         include: {
-            books: true
-        }
+            books: true,
+        },
     });
     return result;
 });
@@ -64,16 +64,16 @@ const deleteCategory = (id) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield prisma_1.default.$transaction((tx) => __awaiter(void 0, void 0, void 0, function* () {
         yield tx.book.deleteMany({
             where: {
-                categoryId: id
-            }
+                categoryId: id,
+            },
         });
         const result = yield tx.category.delete({
             where: {
-                id
+                id,
             },
             include: {
-                books: true
-            }
+                books: true,
+            },
         });
         return result;
     }));
@@ -84,6 +84,6 @@ const categoryServices = {
     updateCategory,
     getallcateGories,
     getsingleCategory,
-    deleteCategory
+    deleteCategory,
 };
 exports.default = categoryServices;

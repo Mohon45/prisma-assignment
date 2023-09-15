@@ -79,6 +79,6 @@ const authcontroller = {
     createauthUser,
     loginUser,
     refreshToken,
-    getUserProfile
+    getUserProfile,
 };
 exports.default = authcontroller;

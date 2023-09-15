@@ -22,7 +22,7 @@ const createBooks = (data) => __awaiter(void 0, void 0, void 0, function* () {
         data,
         include: {
             category: true,
-        }
+        },
     });
     return result;
 });
@@ -32,12 +32,12 @@ const getallbooks = (filters, options) => __awaiter(void 0, void 0, void 0, func
     const andConditions = [];
     if (search) {
         andConditions.push({
-            OR: book_constant_1.booksSearchableFields.map((field) => ({
+            OR: book_constant_1.booksSearchableFields.map(field => ({
                 [field]: {
                     contains: search,
-                    mode: "insensitive"
-                }
-            }))
+                    mode: 'insensitive',
+                },
+            })),
         });
     }
     if (minPrice !== undefined) {
@@ -48,7 +48,7 @@ const getallbooks = (filters, options) => __awaiter(void 0, void 0, void 0, func
                     gte: minPrices,
                 },
             });
-            console.log("MinPrice is used");
+            console.log('MinPrice is used');
         }
     }
     if (maxPrice !== undefined) {
@@ -59,27 +59,27 @@ const getallbooks = (filters, options) => __awaiter(void 0, void 0, void 0, func
                     lte: maxPrices,
                 },
             });
-            console.log("MaxPrice is used");
+            console.log('MaxPrice is used');
         }
     }
     if (category !== undefined) {
         andConditions.push({
             categoryId: {
                 equals: category,
-            }
+            },
         });
     }
     const whereConditions = andConditions.length > 0 ? { AND: andConditions } : {};
     const count = yield prisma_1.default.book.count({
-        where: whereConditions
+        where: whereConditions,
     });
     const result = yield prisma_1.default.book.findMany({
         where: whereConditions,
         include: {
-            category: true
+            category: true,
         },
         skip,
-        take: limit
+        take: limit,
     });
     if (!result) {
         throw new ApiError_1.default(http_status_1.default.BAD_REQUEST, 'something went wrong');
@@ -88,64 +88,64 @@ const getallbooks = (filters, options) => __awaiter(void 0, void 0, void 0, func
         meta: {
             total: count,
             page,
-            limit
+            limit,
         },
-        data: result
+        data: result,
     };
 });
-// get books by category id 
+// get books by category id
 const getBooksByCategoryId = (id, options) => __awaiter(void 0, void 0, void 0, function* () {
     const { limit, skip, page } = paginationHelper_1.paginationHelpers.calculatePagination(options);
     const total = yield prisma_1.default.book.count({
         where: {
             categoryId: {
-                equals: id
-            }
-        }
+                equals: id,
+            },
+        },
     });
     const result = yield prisma_1.default.book.findMany({
         where: {
             categoryId: {
-                equals: id
-            }
+                equals: id,
+            },
         },
         skip,
         take: limit,
         include: {
-            category: true
-        }
+            category: true,
+        },
     });
     return {
         meta: {
             total,
             page,
-            limit
+            limit,
         },
-        data: result
+        data: result,
     };
 });
-// get single book 
+// get single book
 const getsingleBook = (id) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield prisma_1.default.book.findUnique({
         where: {
-            id
+            id,
         },
         include: {
-            category: true
-        }
+            category: true,
+        },
     });
     return result;
 });
-//   update single books 
+//   update single books
 const updateBook = (id, data) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield prisma_1.default.book.update({
         where: {
-            id
+            id,
         },
         include: {
-            category: true
+            category: true,
         },
-        data
+        data,
     });
     return result;
 });
@@ -187,6 +187,6 @@ const booksServices = {
     getBooksByCategoryId,
     getsingleBook,
     updateBook,
-    deleteBook
+    deleteBook,
 };
 exports.default = booksServices;
