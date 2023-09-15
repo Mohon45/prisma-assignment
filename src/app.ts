@@ -17,6 +17,10 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use('/api/v1', router);
 
+app.get('/', (req, res) => {
+  res.send('prisma Assignment Server is Running');
+});
+
 //global error handler
 app.use(globalErrorHandler);
 
